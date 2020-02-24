@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>arithmetic_plugin</id>
+    <name>Evaluate Arithmetic</name>
+    <vendor>Jared Khan</vendor>
+
+    <description><![CDATA[
+    Evaluate selected arithmetic expressions wherever they are.
+    Select the expression you want to evaluate, select <b>Find Action... > Evaluate Math Expressions</b>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action id="org.intellij.sdk.editor.EvaluateArithmeticAction" class="EvaluateArithmeticAction"
+                text="Evaluate Math Expressions">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift meta EQUALS"/>
+        </action>
+    </actions>
+
+</idea-plugin>
