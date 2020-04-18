@@ -1,9 +1,9 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.16'
+    id 'org.jetbrains.intellij' version '0.4.18'
 }
 
-version '1.1'
+version '1.1.1'
 
 sourceCompatibility = 1.8
 
@@ -21,16 +21,12 @@ intellij {
 }
 patchPluginXml {
     sinceBuild '191'
+    untilBuild '201.*'
     changeNotes """
       <ul>
         <li>
-            Trimmed unnecessary zeroes from decimal results.
-            <br/>
-            <code>1.5 * 2</code> → <code>3</code> instead of <code>3.0</code></li>
-        </li>
-        <li>
-            Improved handling of whitespace
-        </li>
+            Updated for the 2020.1 IntelliJ platform.
+         </li>
       </ul>
       """
 }
