@@ -42,10 +42,11 @@ public class EvaluateArithmeticAction extends AnAction {
      */
     static String evaluate(@NotNull String expression_string) {
         // Only allow arithmetic characters and whitespace
-        if (expression_string.matches("^[0-9+\\-/*^().\\s]*")) {
+        if (expression_string.matches("^[0-9+\\-/*^().\\s]*(=\\s*)?")) {
             try {
+                boolean keep = expression_string.contains("=");
                 // Normalise all whitespace to spaces. This means groovy expects a single expression
-                String new_string = expression_string.replaceAll("\\s", " ");
+                String new_string = expression_string.replaceAll("\\s|=", " ");
 
                 String answer = String.valueOf(Eval.me(new_string));
                 if (answer.contains(".")) {
@@ -56,7 +57,7 @@ public class EvaluateArithmeticAction extends AnAction {
                     answer = answer.replaceAll("\\.$","");
 
                 }
-                return answer;
+                return (keep ? expression_string : "") + answer;
             } catch (GroovyRuntimeException e) {
                 // The expression was not a valid arithmetic expression
                 return expression_string;
