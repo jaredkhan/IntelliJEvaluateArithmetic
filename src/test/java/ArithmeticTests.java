@@ -48,8 +48,24 @@ public class ArithmeticTests {
     }
 
     @Test
+    public void canAppendResultToExpression() {
+        assertEquals("1 + 1 =2", EvaluateArithmeticAction.evaluate("1 + 1 ="));
+        // add whitespace after "="
+        assertEquals("5 * 5 = 25", EvaluateArithmeticAction.evaluate("5 * 5 = "));
+        assertEquals("5\t*\t5\t=\n25", EvaluateArithmeticAction.evaluate("5\t*\t5\t=\n"));
+    }
+
+    @Test
+    public void doesNotEvaluateWrongExpression() {
+        assertEquals("1 + 1 = X", EvaluateArithmeticAction.evaluate("1 + 1 = X"));
+        assertEquals("2 * 2 X", EvaluateArithmeticAction.evaluate("2 * 2 X"));
+    }
+
+
+    @Test
     public void doesNotEvaluateMultipleExpressions() {
         assertEquals("1 + 2 3 + 4", EvaluateArithmeticAction.evaluate("1 + 2 3 + 4"));
         assertEquals("1 + 2\n3 + 4", EvaluateArithmeticAction.evaluate("1 + 2\n3 + 4"));
+        assertEquals("1 + 2 = 3 + 4", EvaluateArithmeticAction.evaluate("1 + 2 = 3 + 4"));
     }
 }
