@@ -1,4 +1,5 @@
-# Evaluate Arithmetic
+# Evaluate Arithmetic  ![Gradle](https://github.com/jaredkhan/IntelliJEvaluateArithmetic/workflows/Gradle/badge.svg)
+
 A plugin for IntelliJ IDEs. Download [here](https://plugins.jetbrains.com/plugin/13778-evaluate-arithmetic).
 
 ![multi-caret](images/multi_caret.gif)
