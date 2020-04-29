@@ -44,7 +44,7 @@ public class EvaluateArithmeticAction extends AnAction {
         // Only allow arithmetic characters and whitespace
         if (expression_string.matches("^[0-9+\\-/*^().\\s]*(=\\s*)?")) {
             try {
-                boolean appendResultToExpression = expression_string.contains("=");
+                boolean append_result_to_expression = expression_string.contains("=");
                 // Normalise all whitespace to spaces, remove the optional equal sign (=).
                 // This means groovy expects a single expression
                 String new_string = expression_string.replaceAll("\\s|=", " ");
@@ -58,7 +58,7 @@ public class EvaluateArithmeticAction extends AnAction {
                     answer = answer.replaceAll("\\.$","");
 
                 }
-                return appendResultToExpression ? (expression_string + answer) : answer;
+                return append_result_to_expression ? (expression_string + answer) : answer;
             } catch (GroovyRuntimeException e) {
                 // The expression was not a valid arithmetic expression
                 return expression_string;
