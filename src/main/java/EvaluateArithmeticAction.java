@@ -2,12 +2,12 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.project.Project;
-import groovy.lang.GroovyRuntimeException;
-import groovy.util.Eval;
 import org.jetbrains.annotations.NotNull;
+import com.fathzer.soft.javaluator.DoubleEvaluator;
 
 
 public class EvaluateArithmeticAction extends AnAction {
+    private static DoubleEvaluator evaluator = new DoubleEvaluator();
 
     /**
      * Evaluates the selection at each caret as a mathematical expression
@@ -49,7 +49,7 @@ public class EvaluateArithmeticAction extends AnAction {
                 // This means groovy expects a single expression
                 String new_string = expression_string.replaceAll("\\s|=", " ");
 
-                String answer = String.valueOf(Eval.me(new_string));
+                String answer = String.valueOf(evaluator.evaluate(new_string));
                 if (answer.contains(".")) {
                     // Strip all trailing zeroes after decimal point
                     answer = answer.replaceAll("0*$","");
@@ -59,7 +59,7 @@ public class EvaluateArithmeticAction extends AnAction {
 
                 }
                 return append_result_to_expression ? (expression_string + answer) : answer;
-            } catch (GroovyRuntimeException e) {
+            } catch (IllegalArgumentException e) {
                 // The expression was not a valid arithmetic expression
                 return expression_string;
             }
